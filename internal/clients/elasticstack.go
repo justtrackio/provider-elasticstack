@@ -73,34 +73,46 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		ps.Configuration = map[string]any{}
 
 		// Elasticsearch configuration
-		elasticsearchConfig := map[string]any{}
-		if endpoints, ok := creds[elasticsearchEndpoints]; ok {
-			elasticsearchConfig["endpoints"] = endpoints
-		}
-		if username, ok := creds[elasticsearchUsername]; ok {
-			elasticsearchConfig["username"] = username
-		}
-		if password, ok := creds[elasticsearchPassword]; ok {
-			elasticsearchConfig["password"] = password
-		}
-		if apiKey, ok := creds[elasticsearchApiKey]; ok {
-			elasticsearchConfig["api_key"] = apiKey
-		}
+		elasticsearchConfig := buildElasticsearchConfig(creds)
 		ps.Configuration["elasticsearch"] = elasticsearchConfig
 
 		// Kibana configuration
-		kibanaConfig := map[string]any{}
-		if endpoints, ok := creds[kibanaEndpoints]; ok {
-			kibanaConfig["endpoints"] = endpoints
-		}
-		if username, ok := creds[kibanaUsername]; ok {
-			kibanaConfig["username"] = username
-		}
-		if password, ok := creds[kibanaPassword]; ok {
-			kibanaConfig["password"] = password
-		}
+		kibanaConfig := buildKibanaConfig(creds)
 		ps.Configuration["kibana"] = kibanaConfig
 
 		return ps, nil
 	}
+}
+
+// buildElasticsearchConfig constructs the Elasticsearch configuration from credentials
+func buildElasticsearchConfig(creds map[string]string) map[string]any {
+	config := map[string]any{}
+	if endpoints, ok := creds[elasticsearchEndpoints]; ok {
+		config["endpoints"] = endpoints
+	}
+	if username, ok := creds[elasticsearchUsername]; ok {
+		config["username"] = username
+	}
+	if password, ok := creds[elasticsearchPassword]; ok {
+		config["password"] = password
+	}
+	if apiKey, ok := creds[elasticsearchApiKey]; ok {
+		config["api_key"] = apiKey
+	}
+	return config
+}
+
+// buildKibanaConfig constructs the Kibana configuration from credentials
+func buildKibanaConfig(creds map[string]string) map[string]any {
+	config := map[string]any{}
+	if endpoints, ok := creds[kibanaEndpoints]; ok {
+		config["endpoints"] = endpoints
+	}
+	if username, ok := creds[kibanaUsername]; ok {
+		config["username"] = username
+	}
+	if password, ok := creds[kibanaPassword]; ok {
+		config["password"] = password
+	}
+	return config
 }
