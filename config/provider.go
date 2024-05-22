@@ -10,7 +10,8 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 
-	"github.com/justtrackio/provider-elasticstack/config/null"
+	"github.com/justtrackio/provider-elasticstack/config/branch"
+	"github.com/justtrackio/provider-elasticstack/config/repository"
 )
 
 const (
@@ -36,7 +37,8 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		repository.Configure,
+		branch.Configure,
 	} {
 		configure(pc)
 	}

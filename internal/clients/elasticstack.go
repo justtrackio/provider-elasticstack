@@ -25,6 +25,13 @@ const (
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal elasticstack credentials as JSON"
+	elasticsearchEndpoints  = "endpoints"
+	elasticsearchUsername   = "username"
+	elasticsearchPassword   = "password"
+	elasticsearchApiKey     = "api_key"
+	kibanaEndpoints         = "endpoints"
+	kibanaUsername          = "username"
+	kibanaPassword          = "password"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -63,10 +70,37 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		}
 
 		// Set credentials in Terraform provider configuration.
-		/*ps.Configuration = map[string]any{
-			"username": creds["username"],
-			"password": creds["password"],
-		}*/
+		ps.Configuration = map[string]any{}
+
+		// Elasticsearch configuration
+		elasticsearchConfig := map[string]any{}
+		if endpoints, ok := creds[elasticsearchEndpoints]; ok {
+			elasticsearchConfig["endpoints"] = endpoints
+		}
+		if username, ok := creds[elasticsearchUsername]; ok {
+			elasticsearchConfig["username"] = username
+		}
+		if password, ok := creds[elasticsearchPassword]; ok {
+			elasticsearchConfig["password"] = password
+		}
+		if apiKey, ok := creds[elasticsearchApiKey]; ok {
+			elasticsearchConfig["api_key"] = apiKey
+		}
+		ps.Configuration["elasticsearch"] = elasticsearchConfig
+
+		// Kibana configuration
+		kibanaConfig := map[string]any{}
+		if endpoints, ok := creds[kibanaEndpoints]; ok {
+			kibanaConfig["endpoints"] = endpoints
+		}
+		if username, ok := creds[kibanaUsername]; ok {
+			kibanaConfig["username"] = username
+		}
+		if password, ok := creds[kibanaPassword]; ok {
+			kibanaConfig["password"] = password
+		}
+		ps.Configuration["kibana"] = kibanaConfig
+
 		return ps, nil
 	}
 }
