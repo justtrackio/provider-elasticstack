@@ -1,0 +1,13 @@
+apiVersion: fleet.justtrack.io/v1alpha1
+kind: Integration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: fleet/v1alpha1/integration
+  labels:
+    testing.upbound.io/example-name: test_integration
+  name: test-integration
+spec:
+  forProvider:
+    force: true
+    name: tcp
+    version: 1.16.0
