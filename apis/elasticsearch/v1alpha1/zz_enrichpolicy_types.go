@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
-//
-// SPDX-License-Identifier: Apache-2.0
-
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -153,6 +149,7 @@ type EnrichPolicyInitParameters struct {
 
 	// (Set of String) Fields to add to matching incoming documents. These fields must be present in the source indices.
 	// Fields to add to matching incoming documents. These fields must be present in the source indices.
+	// +listType=set
 	EnrichFields []*string `json:"enrichFields,omitempty" tf:"enrich_fields,omitempty"`
 
 	// (Boolean) Whether to call the execute API function in order to create the enrich index.
@@ -161,6 +158,7 @@ type EnrichPolicyInitParameters struct {
 
 	// (Set of String) Array of one or more source indices used to create the enrich index.
 	// Array of one or more source indices used to create the enrich index.
+	// +listType=set
 	Indices []*string `json:"indices,omitempty" tf:"indices,omitempty"`
 
 	// (String) Field in source indices used to match incoming documents.
@@ -188,6 +186,7 @@ type EnrichPolicyObservation struct {
 
 	// (Set of String) Fields to add to matching incoming documents. These fields must be present in the source indices.
 	// Fields to add to matching incoming documents. These fields must be present in the source indices.
+	// +listType=set
 	EnrichFields []*string `json:"enrichFields,omitempty" tf:"enrich_fields,omitempty"`
 
 	// (Boolean) Whether to call the execute API function in order to create the enrich index.
@@ -199,6 +198,7 @@ type EnrichPolicyObservation struct {
 
 	// (Set of String) Array of one or more source indices used to create the enrich index.
 	// Array of one or more source indices used to create the enrich index.
+	// +listType=set
 	Indices []*string `json:"indices,omitempty" tf:"indices,omitempty"`
 
 	// (String) Field in source indices used to match incoming documents.
@@ -228,6 +228,7 @@ type EnrichPolicyParameters struct {
 	// (Set of String) Fields to add to matching incoming documents. These fields must be present in the source indices.
 	// Fields to add to matching incoming documents. These fields must be present in the source indices.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EnrichFields []*string `json:"enrichFields,omitempty" tf:"enrich_fields,omitempty"`
 
 	// (Boolean) Whether to call the execute API function in order to create the enrich index.
@@ -238,6 +239,7 @@ type EnrichPolicyParameters struct {
 	// (Set of String) Array of one or more source indices used to create the enrich index.
 	// Array of one or more source indices used to create the enrich index.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Indices []*string `json:"indices,omitempty" tf:"indices,omitempty"`
 
 	// (String) Field in source indices used to match incoming documents.
@@ -285,13 +287,14 @@ type EnrichPolicyStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // EnrichPolicy is the Schema for the EnrichPolicys API. Managing Elasticsearch enrich policies, see: https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-apis.html
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,elasticstack}
 type EnrichPolicy struct {
 	metav1.TypeMeta   `json:",inline"`

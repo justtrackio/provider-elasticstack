@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
-//
-// SPDX-License-Identifier: Apache-2.0
-
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -169,6 +165,7 @@ type SecurityUserInitParameters struct {
 
 	// (Set of String) A set of roles the user has. The roles determine the user’s access permissions. Default is [].
 	// A set of roles the user has. The roles determine the user’s access permissions. Default is [].
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// api-put-user.html#security-api-put-user-path-params).
@@ -203,6 +200,7 @@ type SecurityUserObservation struct {
 
 	// (Set of String) A set of roles the user has. The roles determine the user’s access permissions. Default is [].
 	// A set of roles the user has. The roles determine the user’s access permissions. Default is [].
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// api-put-user.html#security-api-put-user-path-params).
@@ -250,6 +248,7 @@ type SecurityUserParameters struct {
 	// (Set of String) A set of roles the user has. The roles determine the user’s access permissions. Default is [].
 	// A set of roles the user has. The roles determine the user’s access permissions. Default is [].
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// api-put-user.html#security-api-put-user-path-params).
@@ -282,13 +281,14 @@ type SecurityUserStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SecurityUser is the Schema for the SecurityUsers API. Adds and updates users in the native realm.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,elasticstack}
 type SecurityUser struct {
 	metav1.TypeMeta   `json:",inline"`

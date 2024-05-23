@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
-//
-// SPDX-License-Identifier: Apache-2.0
-
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -29,6 +25,7 @@ type SpaceInitParameters struct {
 
 	// api-get.html).
 	// The list of disabled features for the space. To get a list of available feature IDs, use the Features API (https://www.elastic.co/guide/en/kibana/master/features-api-get.html).
+	// +listType=set
 	DisabledFeatures []*string `json:"disabledFeatures,omitempty" tf:"disabled_features,omitempty"`
 
 	// (String) The initials shown in the space avatar. By default, the initials are automatically generated from the space name. Initials must be 1 or 2 characters.
@@ -56,6 +53,7 @@ type SpaceObservation struct {
 
 	// api-get.html).
 	// The list of disabled features for the space. To get a list of available feature IDs, use the Features API (https://www.elastic.co/guide/en/kibana/master/features-api-get.html).
+	// +listType=set
 	DisabledFeatures []*string `json:"disabledFeatures,omitempty" tf:"disabled_features,omitempty"`
 
 	// (String) Internal identifier of the resource.
@@ -89,6 +87,7 @@ type SpaceParameters struct {
 	// api-get.html).
 	// The list of disabled features for the space. To get a list of available feature IDs, use the Features API (https://www.elastic.co/guide/en/kibana/master/features-api-get.html).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DisabledFeatures []*string `json:"disabledFeatures,omitempty" tf:"disabled_features,omitempty"`
 
 	// (String) The initials shown in the space avatar. By default, the initials are automatically generated from the space name. Initials must be 1 or 2 characters.
@@ -131,13 +130,14 @@ type SpaceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Space is the Schema for the Spaces API. Creates or updates a Kibana space.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,elasticstack}
 type Space struct {
 	metav1.TypeMeta   `json:",inline"`

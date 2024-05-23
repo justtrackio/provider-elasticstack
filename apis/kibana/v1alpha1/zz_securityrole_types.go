@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
-//
-// SPDX-License-Identifier: Apache-2.0
-
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -21,6 +17,7 @@ type ElasticsearchInitParameters struct {
 
 	// (Set of String) List of the cluster privileges.
 	// List of the cluster privileges.
+	// +listType=set
 	Cluster []*string `json:"cluster,omitempty" tf:"cluster,omitempty"`
 
 	// (Block Set) A list of indices permissions entries. (see below for nested schema)
@@ -29,6 +26,7 @@ type ElasticsearchInitParameters struct {
 
 	// (Set of String) A list of usernames the owners of this role can impersonate.
 	// A list of usernames the owners of this role can impersonate.
+	// +listType=set
 	RunAs []*string `json:"runAs,omitempty" tf:"run_as,omitempty"`
 }
 
@@ -36,6 +34,7 @@ type ElasticsearchObservation struct {
 
 	// (Set of String) List of the cluster privileges.
 	// List of the cluster privileges.
+	// +listType=set
 	Cluster []*string `json:"cluster,omitempty" tf:"cluster,omitempty"`
 
 	// (Block Set) A list of indices permissions entries. (see below for nested schema)
@@ -44,6 +43,7 @@ type ElasticsearchObservation struct {
 
 	// (Set of String) A list of usernames the owners of this role can impersonate.
 	// A list of usernames the owners of this role can impersonate.
+	// +listType=set
 	RunAs []*string `json:"runAs,omitempty" tf:"run_as,omitempty"`
 }
 
@@ -52,6 +52,7 @@ type ElasticsearchParameters struct {
 	// (Set of String) List of the cluster privileges.
 	// List of the cluster privileges.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Cluster []*string `json:"cluster,omitempty" tf:"cluster,omitempty"`
 
 	// (Block Set) A list of indices permissions entries. (see below for nested schema)
@@ -62,6 +63,7 @@ type ElasticsearchParameters struct {
 	// (Set of String) A list of usernames the owners of this role can impersonate.
 	// A list of usernames the owners of this role can impersonate.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	RunAs []*string `json:"runAs,omitempty" tf:"run_as,omitempty"`
 }
 
@@ -73,6 +75,7 @@ type FeatureInitParameters struct {
 
 	// (Set of String) The index level privileges that the owners of the role have on the specified indices.
 	// Feature privileges.
+	// +listType=set
 	Privileges []*string `json:"privileges,omitempty" tf:"privileges,omitempty"`
 }
 
@@ -84,6 +87,7 @@ type FeatureObservation struct {
 
 	// (Set of String) The index level privileges that the owners of the role have on the specified indices.
 	// Feature privileges.
+	// +listType=set
 	Privileges []*string `json:"privileges,omitempty" tf:"privileges,omitempty"`
 }
 
@@ -97,6 +101,7 @@ type FeatureParameters struct {
 	// (Set of String) The index level privileges that the owners of the role have on the specified indices.
 	// Feature privileges.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Privileges []*string `json:"privileges" tf:"privileges,omitempty"`
 }
 
@@ -104,10 +109,12 @@ type FieldSecurityInitParameters struct {
 
 	// (Set of String) List of the fields to which the grants will not be applied.
 	// List of the fields to which the grants will not be applied.
+	// +listType=set
 	Except []*string `json:"except,omitempty" tf:"except,omitempty"`
 
 	// (Set of String) List of the fields to grant the access to.
 	// List of the fields to grant the access to.
+	// +listType=set
 	Grant []*string `json:"grant,omitempty" tf:"grant,omitempty"`
 }
 
@@ -115,10 +122,12 @@ type FieldSecurityObservation struct {
 
 	// (Set of String) List of the fields to which the grants will not be applied.
 	// List of the fields to which the grants will not be applied.
+	// +listType=set
 	Except []*string `json:"except,omitempty" tf:"except,omitempty"`
 
 	// (Set of String) List of the fields to grant the access to.
 	// List of the fields to grant the access to.
+	// +listType=set
 	Grant []*string `json:"grant,omitempty" tf:"grant,omitempty"`
 }
 
@@ -127,11 +136,13 @@ type FieldSecurityParameters struct {
 	// (Set of String) List of the fields to which the grants will not be applied.
 	// List of the fields to which the grants will not be applied.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Except []*string `json:"except,omitempty" tf:"except,omitempty"`
 
 	// (Set of String) List of the fields to grant the access to.
 	// List of the fields to grant the access to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Grant []*string `json:"grant,omitempty" tf:"grant,omitempty"`
 }
 
@@ -143,10 +154,12 @@ type IndicesInitParameters struct {
 
 	// (Set of String) A list of indices (or index name patterns) to which the permissions in this entry apply.
 	// A list of indices (or index name patterns) to which the permissions in this entry apply.
+	// +listType=set
 	Names []*string `json:"names,omitempty" tf:"names,omitempty"`
 
 	// (Set of String) The index level privileges that the owners of the role have on the specified indices.
 	// The index level privileges that the owners of the role have on the specified indices.
+	// +listType=set
 	Privileges []*string `json:"privileges,omitempty" tf:"privileges,omitempty"`
 
 	// (String) A search query that defines the documents the owners of the role have read access to.
@@ -162,10 +175,12 @@ type IndicesObservation struct {
 
 	// (Set of String) A list of indices (or index name patterns) to which the permissions in this entry apply.
 	// A list of indices (or index name patterns) to which the permissions in this entry apply.
+	// +listType=set
 	Names []*string `json:"names,omitempty" tf:"names,omitempty"`
 
 	// (Set of String) The index level privileges that the owners of the role have on the specified indices.
 	// The index level privileges that the owners of the role have on the specified indices.
+	// +listType=set
 	Privileges []*string `json:"privileges,omitempty" tf:"privileges,omitempty"`
 
 	// (String) A search query that defines the documents the owners of the role have read access to.
@@ -183,11 +198,13 @@ type IndicesParameters struct {
 	// (Set of String) A list of indices (or index name patterns) to which the permissions in this entry apply.
 	// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Names []*string `json:"names" tf:"names,omitempty"`
 
 	// (Set of String) The index level privileges that the owners of the role have on the specified indices.
 	// The index level privileges that the owners of the role have on the specified indices.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Privileges []*string `json:"privileges" tf:"privileges,omitempty"`
 
 	// (String) A search query that defines the documents the owners of the role have read access to.
@@ -200,6 +217,7 @@ type KibanaInitParameters struct {
 
 	// (Set of String) A base privilege. When specified, the base must be ["all"] or ["read"]. When the base privileges are specified, you are unable to use the "feature" section.
 	// A base privilege. When specified, the base must be ["all"] or ["read"]. When the base privileges are specified, you are unable to use the "feature" section.
+	// +listType=set
 	Base []*string `json:"base,omitempty" tf:"base,omitempty"`
 
 	// (Block Set) List of privileges for specific features. When the feature privileges are specified, you are unable to use the "base" section. (see below for nested schema)
@@ -208,6 +226,7 @@ type KibanaInitParameters struct {
 
 	// (Set of String) The spaces to apply the privileges to. To grant access to all spaces, set to ["*"], or omit the value.
 	// The spaces to apply the privileges to. To grant access to all spaces, set to ["*"], or omit the value.
+	// +listType=set
 	Spaces []*string `json:"spaces,omitempty" tf:"spaces,omitempty"`
 }
 
@@ -215,6 +234,7 @@ type KibanaObservation struct {
 
 	// (Set of String) A base privilege. When specified, the base must be ["all"] or ["read"]. When the base privileges are specified, you are unable to use the "feature" section.
 	// A base privilege. When specified, the base must be ["all"] or ["read"]. When the base privileges are specified, you are unable to use the "feature" section.
+	// +listType=set
 	Base []*string `json:"base,omitempty" tf:"base,omitempty"`
 
 	// (Block Set) List of privileges for specific features. When the feature privileges are specified, you are unable to use the "base" section. (see below for nested schema)
@@ -223,6 +243,7 @@ type KibanaObservation struct {
 
 	// (Set of String) The spaces to apply the privileges to. To grant access to all spaces, set to ["*"], or omit the value.
 	// The spaces to apply the privileges to. To grant access to all spaces, set to ["*"], or omit the value.
+	// +listType=set
 	Spaces []*string `json:"spaces,omitempty" tf:"spaces,omitempty"`
 }
 
@@ -231,6 +252,7 @@ type KibanaParameters struct {
 	// (Set of String) A base privilege. When specified, the base must be ["all"] or ["read"]. When the base privileges are specified, you are unable to use the "feature" section.
 	// A base privilege. When specified, the base must be ["all"] or ["read"]. When the base privileges are specified, you are unable to use the "feature" section.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Base []*string `json:"base,omitempty" tf:"base,omitempty"`
 
 	// (Block Set) List of privileges for specific features. When the feature privileges are specified, you are unable to use the "base" section. (see below for nested schema)
@@ -241,6 +263,7 @@ type KibanaParameters struct {
 	// (Set of String) The spaces to apply the privileges to. To grant access to all spaces, set to ["*"], or omit the value.
 	// The spaces to apply the privileges to. To grant access to all spaces, set to ["*"], or omit the value.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Spaces []*string `json:"spaces" tf:"spaces,omitempty"`
 }
 
@@ -332,13 +355,14 @@ type SecurityRoleStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SecurityRole is the Schema for the SecurityRoles API. Creates or updates a Kibana role.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,elasticstack}
 type SecurityRole struct {
 	metav1.TypeMeta   `json:",inline"`

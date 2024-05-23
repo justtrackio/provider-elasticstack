@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
-//
-// SPDX-License-Identifier: Apache-2.0
-
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -161,6 +157,7 @@ type SnapshotLifecycleInitParameters struct {
 
 	// (Set of String) Feature states to include in the snapshot.
 	// Feature states to include in the snapshot.
+	// +listType=set
 	FeatureStates []*string `json:"featureStates,omitempty" tf:"feature_states,omitempty"`
 
 	// (Boolean) If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.
@@ -224,6 +221,7 @@ type SnapshotLifecycleObservation struct {
 
 	// (Set of String) Feature states to include in the snapshot.
 	// Feature states to include in the snapshot.
+	// +listType=set
 	FeatureStates []*string `json:"featureStates,omitempty" tf:"feature_states,omitempty"`
 
 	// (String) Internal identifier of the resource
@@ -294,6 +292,7 @@ type SnapshotLifecycleParameters struct {
 	// (Set of String) Feature states to include in the snapshot.
 	// Feature states to include in the snapshot.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	FeatureStates []*string `json:"featureStates,omitempty" tf:"feature_states,omitempty"`
 
 	// (Boolean) If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.
@@ -376,13 +375,14 @@ type SnapshotLifecycleStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SnapshotLifecycle is the Schema for the SnapshotLifecycles API. Creates or updates a snapshot lifecycle policy.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,elasticstack}
 type SnapshotLifecycle struct {
 	metav1.TypeMeta   `json:",inline"`
