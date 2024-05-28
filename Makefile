@@ -10,7 +10,7 @@ export TERRAFORM_PROVIDER_SOURCE ?= elastic/elasticstack
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/elastic/terraform-provider-elasticstack
 export TERRAFORM_PROVIDER_VERSION ?= 0.11.3
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-elasticstack
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://releases.hashicorp.com/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/$(TERRAFORM_PROVIDER_VERSION)
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/elastic/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
 export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-elasticstack_v$(TERRAFORM_PROVIDER_VERSION)
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
