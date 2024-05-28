@@ -22,6 +22,14 @@ type InputInitParameters struct {
 	// (String) The identifier of the input.
 	// The identifier of the input.
 	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`
+
+	// (String, Sensitive) Input streams as JSON.
+	// Input streams as JSON.
+	StreamsJSONSecretRef *v1.SecretKeySelector `json:"streamsJsonSecretRef,omitempty" tf:"-"`
+
+	// level variables as JSON.
+	// Input variables as JSON.
+	VarsJSONSecretRef *v1.SecretKeySelector `json:"varsJsonSecretRef,omitempty" tf:"-"`
 }
 
 type InputObservation struct {
@@ -98,6 +106,10 @@ type IntegrationPolicyInitParameters struct {
 	// (String) Unique identifier of the integration policy.
 	// Unique identifier of the integration policy.
 	PolicyID *string `json:"policyId,omitempty" tf:"policy_id,omitempty"`
+
+	// level variables as JSON.
+	// Integration-level variables as JSON.
+	VarsJSONSecretRef *v1.SecretKeySelector `json:"varsJsonSecretRef,omitempty" tf:"-"`
 }
 
 type IntegrationPolicyObservation struct {

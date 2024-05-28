@@ -15,6 +15,14 @@ import (
 
 type SecuritySystemUserElasticsearchConnectionInitParameters struct {
 
+	// (String, Sensitive) API Key to use for authentication to Elasticsearch
+	// API Key to use for authentication to Elasticsearch
+	APIKeySecretRef *v1.SecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
+
+	// (String, Sensitive) Bearer Token to use for authentication to Elasticsearch
+	// Bearer Token to use for authentication to Elasticsearch
+	BearerTokenSecretRef *v1.SecretKeySelector `json:"bearerTokenSecretRef,omitempty" tf:"-"`
+
 	// encoded custom Certificate Authority certificate
 	// PEM-encoded custom Certificate Authority certificate
 	CAData *string `json:"caData,omitempty" tf:"ca_data,omitempty"`
@@ -31,13 +39,27 @@ type SecuritySystemUserElasticsearchConnectionInitParameters struct {
 	// Path to a file containing the PEM encoded certificate for client auth
 	CertFile *string `json:"certFile,omitempty" tf:"cert_file,omitempty"`
 
+	Endpoints []*string `json:"endpointsSecretRef,omitempty" tf:"-"`
+
+	// (String, Sensitive) ES Client Authentication field to be used with the bearer token
+	// ES Client Authentication field to be used with the bearer token
+	EsClientAuthenticationSecretRef *v1.SecretKeySelector `json:"esClientAuthenticationSecretRef,omitempty" tf:"-"`
+
 	// (Boolean) Disable TLS certificate validation
 	// Disable TLS certificate validation
 	Insecure *bool `json:"insecure,omitempty" tf:"insecure,omitempty"`
 
+	// (String, Sensitive) PEM encoded private key for client auth
+	// PEM encoded private key for client auth
+	KeyDataSecretRef *v1.SecretKeySelector `json:"keyDataSecretRef,omitempty" tf:"-"`
+
 	// (String) Path to a file containing the PEM encoded private key for client auth
 	// Path to a file containing the PEM encoded private key for client auth
 	KeyFile *string `json:"keyFile,omitempty" tf:"key_file,omitempty"`
+
+	// (String, Sensitive) The user’s password. Passwords must be at least 6 characters long.
+	// Password to use for API authentication to Elasticsearch.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// in-users.html).
 	// Username to use for API authentication to Elasticsearch.
@@ -150,6 +172,14 @@ type SecuritySystemUserInitParameters struct {
 	// (Boolean) Specifies whether the user is enabled. The default value is true.
 	// Specifies whether the user is enabled. The default value is true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// settings.html#hashing-settings).
+	// A hash of the user’s password. This must be produced using the same hashing algorithm as has been configured for password storage (see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-settings.html#hashing-settings).
+	PasswordHashSecretRef *v1.SecretKeySelector `json:"passwordHashSecretRef,omitempty" tf:"-"`
+
+	// (String, Sensitive) The user’s password. Passwords must be at least 6 characters long.
+	// The user’s password. Passwords must be at least 6 characters long.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// in-users.html).
 	// An identifier for the system user (see https://www.elastic.co/guide/en/elasticsearch/reference/current/built-in-users.html).

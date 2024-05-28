@@ -15,6 +15,14 @@ import (
 
 type SecurityAPIKeyElasticsearchConnectionInitParameters struct {
 
+	// (String, Sensitive) Generated API Key.
+	// API Key to use for authentication to Elasticsearch
+	APIKeySecretRef *v1.SecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
+
+	// (String, Sensitive) Bearer Token to use for authentication to Elasticsearch
+	// Bearer Token to use for authentication to Elasticsearch
+	BearerTokenSecretRef *v1.SecretKeySelector `json:"bearerTokenSecretRef,omitempty" tf:"-"`
+
 	// encoded custom Certificate Authority certificate
 	// PEM-encoded custom Certificate Authority certificate
 	CAData *string `json:"caData,omitempty" tf:"ca_data,omitempty"`
@@ -31,13 +39,27 @@ type SecurityAPIKeyElasticsearchConnectionInitParameters struct {
 	// Path to a file containing the PEM encoded certificate for client auth
 	CertFile *string `json:"certFile,omitempty" tf:"cert_file,omitempty"`
 
+	Endpoints []*string `json:"endpointsSecretRef,omitempty" tf:"-"`
+
+	// (String, Sensitive) ES Client Authentication field to be used with the bearer token
+	// ES Client Authentication field to be used with the bearer token
+	EsClientAuthenticationSecretRef *v1.SecretKeySelector `json:"esClientAuthenticationSecretRef,omitempty" tf:"-"`
+
 	// (Boolean) Disable TLS certificate validation
 	// Disable TLS certificate validation
 	Insecure *bool `json:"insecure,omitempty" tf:"insecure,omitempty"`
 
+	// (String, Sensitive) PEM encoded private key for client auth
+	// PEM encoded private key for client auth
+	KeyDataSecretRef *v1.SecretKeySelector `json:"keyDataSecretRef,omitempty" tf:"-"`
+
 	// (String) Path to a file containing the PEM encoded private key for client auth
 	// Path to a file containing the PEM encoded private key for client auth
 	KeyFile *string `json:"keyFile,omitempty" tf:"key_file,omitempty"`
+
+	// (String, Sensitive) Password to use for API authentication to Elasticsearch.
+	// Password to use for API authentication to Elasticsearch.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// (String) Username to use for API authentication to Elasticsearch.
 	// Username to use for API authentication to Elasticsearch.

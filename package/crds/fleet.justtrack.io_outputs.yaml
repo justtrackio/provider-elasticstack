@@ -166,8 +166,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - keySecretRef
                       type: object
                     type: array
                   type:
@@ -199,6 +197,25 @@ spec:
                       (String) Fingerprint of trusted CA.
                       Fingerprint of trusted CA.
                     type: string
+                  configYamlSecretRef:
+                    description: |-
+                      (String, Sensitive) Advanced YAML configuration. YAML settings here will be added to the output section of each agent policy.
+                      Advanced YAML configuration. YAML settings here will be added to the output section of each agent policy.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   defaultIntegrations:
                     description: |-
                       (Boolean) Make this output the default for agent integrations.
@@ -244,6 +261,27 @@ spec:
                           items:
                             type: string
                           type: array
+                        keySecretRef:
+                          description: |-
+                            (String, Sensitive) Client SSL certificate key.
+                            Client SSL certificate key.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - keySecretRef
                       type: object
                     type: array
                   type:

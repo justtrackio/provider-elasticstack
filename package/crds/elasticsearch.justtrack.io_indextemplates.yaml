@@ -390,6 +390,44 @@ spec:
                       Elasticsearch connection configuration block. This property will be removed in a future provider version. Configure the Elasticsearch connection via the provider configuration instead.
                     items:
                       properties:
+                        apiKeySecretRef:
+                          description: |-
+                            (String, Sensitive) API Key to use for authentication to Elasticsearch
+                            API Key to use for authentication to Elasticsearch
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        bearerTokenSecretRef:
+                          description: |-
+                            (String, Sensitive) Bearer Token to use for authentication to Elasticsearch
+                            Bearer Token to use for authentication to Elasticsearch
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         caData:
                           description: |-
                             encoded custom Certificate Authority certificate
@@ -410,16 +448,77 @@ spec:
                             (String) Path to a file containing the PEM encoded certificate for client auth
                             Path to a file containing the PEM encoded certificate for client auth
                           type: string
+                        endpointsSecretRef:
+                          items:
+                            type: string
+                          type: array
+                        esClientAuthenticationSecretRef:
+                          description: |-
+                            (String, Sensitive) ES Client Authentication field to be used with the bearer token
+                            ES Client Authentication field to be used with the bearer token
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         insecure:
                           description: |-
                             (Boolean) Disable TLS certificate validation
                             Disable TLS certificate validation
                           type: boolean
+                        keyDataSecretRef:
+                          description: |-
+                            (String, Sensitive) PEM encoded private key for client auth
+                            PEM encoded private key for client auth
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         keyFile:
                           description: |-
                             (String) Path to a file containing the PEM encoded private key for client auth
                             Path to a file containing the PEM encoded private key for client auth
                           type: string
+                        passwordSecretRef:
+                          description: |-
+                            (String, Sensitive) Password to use for API authentication to Elasticsearch.
+                            Password to use for API authentication to Elasticsearch.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         username:
                           description: |-
                             (String) Username to use for API authentication to Elasticsearch.

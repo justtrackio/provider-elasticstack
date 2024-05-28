@@ -21,7 +21,7 @@ func (mg *IntegrationPolicy) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IntegrationPolicy
 func (tr *IntegrationPolicy) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"input[*].streams_json": "spec.forProvider.input[*].streamsJsonSecretRef", "input[*].vars_json": "spec.forProvider.input[*].varsJsonSecretRef", "vars_json": "spec.forProvider.varsJsonSecretRef"}
+	return map[string]string{"input[*].streams_json": "input[*].streamsJsonSecretRef", "input[*].vars_json": "input[*].varsJsonSecretRef", "vars_json": "varsJsonSecretRef"}
 }
 
 // GetObservation of this IntegrationPolicy

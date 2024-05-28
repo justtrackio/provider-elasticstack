@@ -239,6 +239,44 @@ spec:
                             (String) The identifier of the input.
                             The identifier of the input.
                           type: string
+                        streamsJsonSecretRef:
+                          description: |-
+                            (String, Sensitive) Input streams as JSON.
+                            Input streams as JSON.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        varsJsonSecretRef:
+                          description: |-
+                            level variables as JSON.
+                            Input variables as JSON.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                       type: object
                     type: array
                   integrationName:
@@ -266,6 +304,25 @@ spec:
                       (String) Unique identifier of the integration policy.
                       Unique identifier of the integration policy.
                     type: string
+                  varsJsonSecretRef:
+                    description: |-
+                      level variables as JSON.
+                      Integration-level variables as JSON.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                 type: object
               managementPolicies:
                 default:

@@ -21,7 +21,7 @@ func (mg *SecurityUser) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SecurityUser
 func (tr *SecurityUser) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"elasticsearch_connection[*].api_key": "spec.forProvider.elasticsearchConnection[*].apiKeySecretRef", "elasticsearch_connection[*].bearer_token": "spec.forProvider.elasticsearchConnection[*].bearerTokenSecretRef", "elasticsearch_connection[*].endpoints[*]": "spec.forProvider.elasticsearchConnection[*].endpointsSecretRef[*]", "elasticsearch_connection[*].es_client_authentication": "spec.forProvider.elasticsearchConnection[*].esClientAuthenticationSecretRef", "elasticsearch_connection[*].key_data": "spec.forProvider.elasticsearchConnection[*].keyDataSecretRef", "elasticsearch_connection[*].password": "spec.forProvider.elasticsearchConnection[*].passwordSecretRef", "password": "spec.forProvider.passwordSecretRef", "password_hash": "spec.forProvider.passwordHashSecretRef"}
+	return map[string]string{"elasticsearch_connection[*].api_key": "elasticsearchConnection[*].apiKeySecretRef", "elasticsearch_connection[*].bearer_token": "elasticsearchConnection[*].bearerTokenSecretRef", "elasticsearch_connection[*].endpoints[*]": "elasticsearchConnection[*].endpointsSecretRef[*]", "elasticsearch_connection[*].es_client_authentication": "elasticsearchConnection[*].esClientAuthenticationSecretRef", "elasticsearch_connection[*].key_data": "elasticsearchConnection[*].keyDataSecretRef", "elasticsearch_connection[*].password": "elasticsearchConnection[*].passwordSecretRef", "password": "passwordSecretRef", "password_hash": "passwordHashSecretRef"}
 }
 
 // GetObservation of this SecurityUser

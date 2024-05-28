@@ -21,7 +21,7 @@ func (mg *Output) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Output
 func (tr *Output) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"config_yaml": "spec.forProvider.configYamlSecretRef", "ssl[*].key": "spec.forProvider.ssl[*].keySecretRef"}
+	return map[string]string{"config_yaml": "configYamlSecretRef", "ssl[*].key": "ssl[*].keySecretRef"}
 }
 
 // GetObservation of this Output

@@ -23,6 +23,10 @@ type OutputInitParameters struct {
 	// Fingerprint of trusted CA.
 	CATrustedFingerprint *string `json:"caTrustedFingerprint,omitempty" tf:"ca_trusted_fingerprint,omitempty"`
 
+	// (String, Sensitive) Advanced YAML configuration. YAML settings here will be added to the output section of each agent policy.
+	// Advanced YAML configuration. YAML settings here will be added to the output section of each agent policy.
+	ConfigYamlSecretRef *v1.SecretKeySelector `json:"configYamlSecretRef,omitempty" tf:"-"`
+
 	// (Boolean) Make this output the default for agent integrations.
 	// Make this output the default for agent integrations.
 	DefaultIntegrations *bool `json:"defaultIntegrations,omitempty" tf:"default_integrations,omitempty"`
@@ -156,6 +160,10 @@ type SSLInitParameters struct {
 	// (List of String) Server SSL certificate authorities.
 	// Server SSL certificate authorities.
 	CertificateAuthorities []*string `json:"certificateAuthorities,omitempty" tf:"certificate_authorities,omitempty"`
+
+	// (String, Sensitive) Client SSL certificate key.
+	// Client SSL certificate key.
+	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
 }
 
 type SSLObservation struct {
@@ -183,7 +191,7 @@ type SSLParameters struct {
 
 	// (String, Sensitive) Client SSL certificate key.
 	// Client SSL certificate key.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
 }
 
